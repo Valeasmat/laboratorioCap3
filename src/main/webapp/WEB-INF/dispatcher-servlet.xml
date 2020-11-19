@@ -16,6 +16,9 @@ and open the template in the editor.
         http://www.springframework.org/schema/mvc/spring-mvc.xsd"> 
  
        <context:component-scan base-package="edu.cibertec.capitulo3" />  
-           
-</beans
+       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+           <property name="prefix" value="/WEB-INF/views/"></property>
+           <property name="suffix" value=".jsp"></property>
+       </bean>
+</beans>
 

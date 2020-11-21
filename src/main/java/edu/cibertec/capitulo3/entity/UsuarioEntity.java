@@ -22,6 +22,7 @@ public class UsuarioEntity {
     @NotBlank
     private String clave;
     private String nombreCompleto;
+    private byte[] foto;
 
     public UsuarioEntity(){
     }
@@ -34,6 +35,14 @@ public class UsuarioEntity {
     
     public String getUsuario() {
         return usuario;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public void setUsuario(String usuario) {

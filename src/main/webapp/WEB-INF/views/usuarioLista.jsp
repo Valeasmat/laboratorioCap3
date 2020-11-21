@@ -26,7 +26,8 @@
                     <tr class="info">                     
                         <th>Usuario</th>                     
                         <th>Clave</th>                     
-                        <th>Nombre completo</th>                 
+                        <th>Nombre completo</th> 
+                        <th>Foto</th>
                     </tr>             
                 </thead>             
                 <tbody>                 
@@ -34,7 +35,8 @@
                     <tr>                     
                         <td><%= usuario.getUsuario()%></td>                     
                         <td><%= usuario.getClave()%></td>                     
-                        <td><%= usuario.getNombreCompleto()%></td>                 
+                        <td><%= usuario.getNombreCompleto()%></td>  
+                        <td><a href="fotoMostrar.htm?codigoUsuario=<%= usuario.getUsuario()%>">foto</a></td>
                     </tr>                 
                     <% }%>             
                 </tbody>         

@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -65,5 +68,20 @@ public class UsuarioController {
         
         return mv;
     }
+    
+    @RequestMapping("fotoMostrar")     
+    public String fotoMostrar(HttpServletRequest request, 
+            Model modelo) {         
+        modelo.addAttribute("usuario", usuarioService.getUsuario(request.getParameter("codigoUsuario")));         
+        return "fotoUsuario";     
+    }
+    
+    @RequestMapping("fotoGrabar")     
+    public ModelAndView fotoGrabar(@RequestParam("archivo") CommonsMultipartFile archivo,             
+            @RequestParam("codigoUsuario") String codigoUsuario) {                  
+        UsuarioEntity usuario = usuarioService.getUsuario(codigoUsuario);
+        usuario.setFoto(archivo.getBytes());                  
+        return new ModelAndView("usuarioLista", "lista", usuarioService.getListaUsuarios());     
+    } 
     
 }

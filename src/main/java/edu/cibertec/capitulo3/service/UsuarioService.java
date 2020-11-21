@@ -32,4 +32,8 @@ public class UsuarioService {
     public List<UsuarioEntity> getListaUsuarios(){
         return usuarioDAO.getListaUsuarios();
     }
+    
+    public UsuarioEntity getUsuario(String codigo) {
+        return usuarioDAO.getUsuario(codigo);
+    }
 }

@@ -35,6 +35,18 @@ public class UsuarioDAO {
         return listaUsuarios;
     }
     
+    public UsuarioEntity getUsuario(String codigo){
+        UsuarioEntity rpta=null;
+        
+        for(UsuarioEntity usuario: listaUsuarios){
+            if(usuario.getUsuario().equalsIgnoreCase(codigo)){
+                rpta=usuario;
+                break;
+            }
+        }
+        return rpta;
+    }
+    
     public UsuarioEntity validaLogin(UsuarioEntity usuario){
         if (usuario.getUsuario().equalsIgnoreCase("user")&&
                 usuario.getClave().equals("12345")){

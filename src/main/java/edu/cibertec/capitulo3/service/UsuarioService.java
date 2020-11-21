@@ -7,6 +7,7 @@ package edu.cibertec.capitulo3.service;
 
 import edu.cibertec.capitulo3.dao.UsuarioDAO;
 import edu.cibertec.capitulo3.entity.UsuarioEntity;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,13 @@ public class UsuarioService {
     
     public UsuarioEntity validarLogin(UsuarioEntity usuario){
         return usuarioDAO.validaLogin(usuario);
+    }
+    
+    public void insertaUsuario(UsuarioEntity ue){
+        usuarioDAO.insertaUsuario(ue);
+    }
+    
+    public List<UsuarioEntity> getListaUsuarios(){
+        return usuarioDAO.getListaUsuarios();
     }
 }

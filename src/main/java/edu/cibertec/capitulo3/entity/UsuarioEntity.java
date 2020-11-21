@@ -5,16 +5,33 @@
  */
 package edu.cibertec.capitulo3.entity;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  *
  * @author Adminfoco
  */
 public class UsuarioEntity {
     
+    @Size(min=3,max=20)
     private String usuario;
+    
+    @NotNull
+    @NotBlank
     private String clave;
     private String nombreCompleto;
 
+    public UsuarioEntity(){
+    }
+    
+    public UsuarioEntity(String usuario, String clave, String nombreCompleto) {
+        this.usuario = usuario;
+        this.clave = clave;
+        this.nombreCompleto = nombreCompleto;
+    }
+    
     public String getUsuario() {
         return usuario;
     }

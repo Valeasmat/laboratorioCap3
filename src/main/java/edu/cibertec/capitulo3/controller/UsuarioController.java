@@ -8,8 +8,12 @@ package edu.cibertec.capitulo3.controller;
 import edu.cibertec.capitulo3.entity.UsuarioEntity;
 import edu.cibertec.capitulo3.service.UsuarioService;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,8 +39,31 @@ public class UsuarioController {
         if (ue == null) {             
             mv = new ModelAndView("login", "msgError", "Usuario y clave no existen. Vuelva a intentar!");         
         } else {             
-            mv = new ModelAndView("saludo", "mensaje", "Bienvenido " + ue.getNombreCompleto());         
+            mv = new ModelAndView("usuarioLista", "lista", usuarioService.getListaUsuarios());         
         }         
-        return mv;     }
+        return mv;     
+    }
+    
+    @RequestMapping("usuarioCrear")
+    public ModelAndView usuarioCrear(){
+        return new ModelAndView("usuarioDatos","usuarioBean",new UsuarioEntity());
+        
+    }
+    
+    @RequestMapping("usuarioGrabar")
+    public ModelAndView usuarioGrabar(@Valid @ModelAttribute("usuarioBean") UsuarioEntity usuarioValida,
+            BindingResult result,ModelMap modelMap){
+        
+        ModelAndView mv=null;
+        
+        if (result.hasErrors()){
+            mv=new ModelAndView("usuarioDatos","usuarioBean",usuarioValida);
+        } else {
+            usuarioService.insertaUsuario(usuarioValida);
+            mv= new ModelAndView("usuarioLista","lista",usuarioService.getListaUsuarios());
+        }
+        
+        return mv;
+    }
     
 }

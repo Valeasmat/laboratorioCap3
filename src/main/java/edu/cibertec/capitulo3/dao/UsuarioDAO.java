@@ -6,6 +6,8 @@
 package edu.cibertec.capitulo3.dao;
 
 import edu.cibertec.capitulo3.entity.UsuarioEntity;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +16,24 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class UsuarioDAO {
+    
+    private static List<UsuarioEntity> listaUsuarios;
+    
+    static{
+        listaUsuarios=new ArrayList<>();
+        listaUsuarios.add(new UsuarioEntity("jose","12345","Jose Perez"));
+        listaUsuarios.add(new UsuarioEntity("maria","54321","Maria Qusipe"));
+        listaUsuarios.add(new UsuarioEntity("yaddif","58475","Yaddif Medina"));
+        listaUsuarios.add(new UsuarioEntity("olga","po54d","Olga Ibarra"));
+    }
+    
+    public void insertaUsuario(UsuarioEntity ue){
+        listaUsuarios.add(ue);
+    }
+    
+    public List<UsuarioEntity> getListaUsuarios() {
+        return listaUsuarios;
+    }
     
     public UsuarioEntity validaLogin(UsuarioEntity usuario){
         if (usuario.getUsuario().equalsIgnoreCase("user")&&

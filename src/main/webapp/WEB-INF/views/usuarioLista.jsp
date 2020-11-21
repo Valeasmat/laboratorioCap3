@@ -43,5 +43,6 @@
             </table> 
         </div>
         <a href="usuarioCrear.htm" class="btn btn-primary btn-lg active">Crear Usuario</a>
+        <h3>Se ha creado en esta sesion ${sessionScope.contador} usuarios!</h3>
     </body>
 </html>

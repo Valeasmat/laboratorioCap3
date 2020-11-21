@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Adminfoco
  */
 @Controller
+@SessionAttributes("contador")
 public class UsuarioController {
     @Autowired     
     private UsuarioService usuarioService; 
@@ -42,7 +44,8 @@ public class UsuarioController {
         if (ue == null) {             
             mv = new ModelAndView("login", "msgError", "Usuario y clave no existen. Vuelva a intentar!");         
         } else {             
-            mv = new ModelAndView("usuarioLista", "lista", usuarioService.getListaUsuarios());         
+            mv = new ModelAndView("usuarioLista", "lista", usuarioService.getListaUsuarios());  
+            mv.addObject("contador",0);
         }         
         return mv;     
     }
@@ -63,7 +66,11 @@ public class UsuarioController {
             mv=new ModelAndView("usuarioDatos","usuarioBean",usuarioValida);
         } else {
             usuarioService.insertaUsuario(usuarioValida);
+            int contador =(int)modelMap.get("contador");
+            contador++;
+            
             mv= new ModelAndView("usuarioLista","lista",usuarioService.getListaUsuarios());
+            mv.addObject("contador",contador);
         }
         
         return mv;
